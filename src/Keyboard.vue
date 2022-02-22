@@ -1,26 +1,27 @@
 <script setup lang="ts">
-import { LetterState } from './types'
+import { LetterState } from "./types";
 
 defineProps<{
-  letterStates: Record<string, LetterState>
-}>()
+  letterStates: Record<string, LetterState>;
+}>();
 
 defineEmits<{
-  (e: 'key', key: string): void
-}>()
+  (e: "key", key: string): void;
+}>();
 
 const rows = [
-  'qwertyuiop'.split(''),
-  'asdfghjkl'.split(''),
-  ['Enter', ...'zxcvbnm'.split(''), 'Backspace']
-]
+  "ضصثقفغعهخحپ".split(""),
+  "شسیبلاتنمکگ".split(""),
+  ["Enter", ..."ظطزرذدئو".split(""), "Backspace"],
+];
 </script>
 
 <template>
   <div id="keyboard">
-    <div class="row" v-for="(row, i) in rows">
+    <div class="row" v-for="(row, i) in rows" :key="i">
       <div class="spacer" v-if="i === 1"></div>
       <button
+        :key="key"
         v-for="key in row"
         :class="[key.length > 1 && 'big', letterStates[key]]"
         @click="$emit('key', key)"
@@ -46,7 +47,7 @@ const rows = [
 
 <style scoped>
 #keyboard {
-  margin: 30px 8px 0;
+  margin: 30px 0 0 0;
   user-select: none;
 }
 .row {
@@ -55,15 +56,13 @@ const rows = [
   margin: 0 auto 8px;
   touch-action: manipulation;
 }
-.spacer {
-  flex: 0.5;
-}
+
 button {
   font-family: inherit;
   font-weight: bold;
   border: 0;
   padding: 0;
-  margin: 0 6px 0 0;
+  margin: 0 4px 0 0;
   height: 58px;
   border-radius: 4px;
   cursor: pointer;
@@ -82,6 +81,6 @@ button:last-of-type {
   margin: 0;
 }
 button.big {
-  flex: 1.5;
+  flex: 1.2;
 }
 </style>
