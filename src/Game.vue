@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onUnmounted } from "vue";
-import { getWordOfTheDay, allWords } from "./words";
+import { getWordOfTheDay, allWords, getNumberOfWordle } from "./words";
 import Keyboard from "./Keyboard.vue";
 import { LetterState } from "./types";
 
@@ -173,7 +173,15 @@ function genResultGrid() {
 }
 
 function copyResult() {
-  if ("clipboard" in navigator) navigator.clipboard.writeText(grid);
+  if ("clipboard" in navigator) {
+    let text = `Persian wordle ${getNumberOfWordle()} `; // Persian wordle 52
+    text += `${currentRowIndex + 1} / ${board.length}`; // Persian wordle 52 3 / 6
+    text += `\n`; // A line break
+    text += `${grid}`; // The answer grid
+
+    navigator.clipboard.writeText(text);
+    showMessage("کپی شد.", -1);
+  }
   // No fallback. If you use IE, look back at your life decisions and come back. ok?
 }
 </script>
@@ -266,6 +274,7 @@ function copyResult() {
   border-radius: 5px;
   border: none;
   padding: 5px 8px;
+  cursor: pointer;
 }
 .message {
   position: absolute;
