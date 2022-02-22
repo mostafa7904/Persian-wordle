@@ -9,8 +9,18 @@ export function getWordOfTheDay() {
   return answers[day];
 }
 
-const answers = ["کمینه", "بوسید", "مریضی", "تهران"];
+const answers = [
+  "کمینه",
+  "بوسید",
+  "مریضی",
+  "تهران",
+  "بالشت",
+  "ژیوان",
+  "استاد",
+  "پرتاب",
+  "منتهی",
+];
 
-const allowedGuesses = ["بلبلی", "طهران"];
+const allowedGuesses = ["برتاب", "طهران"];
 
 export const allWords = [...answers, ...allowedGuesses];

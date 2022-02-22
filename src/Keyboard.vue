@@ -12,7 +12,7 @@ defineEmits<{
 const rows = [
   "ضصثقفغعهخحپ".split(""),
   "شسیبلاتنمکگ".split(""),
-  ["Enter", ..."ظطزرذدئو".split(""), "Backspace"],
+  ["Enter", ..."ظطزژرذدو".split(""), "Backspace"],
 ];
 </script>
 
