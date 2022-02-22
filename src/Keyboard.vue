@@ -10,8 +10,8 @@ defineEmits<{
 }>();
 
 const rows = [
-  "ضصثقفغعهخحپ".split(""),
-  "شسیبلاتنمکگ".split(""),
+  "ضصثقفغعهخحجچ".split(""),
+  "شسیبلاتنمکگپ".split(""),
   ["Enter", ..."ظطزژرذدو".split(""), "Backspace"],
 ];
 </script>
@@ -19,7 +19,6 @@ const rows = [
 <template>
   <div id="keyboard">
     <div class="row" v-for="(row, i) in rows" :key="i">
-      <div class="spacer" v-if="i === 1"></div>
       <button
         :key="key"
         v-for="key in row"
@@ -47,7 +46,7 @@ const rows = [
 
 <style scoped>
 #keyboard {
-  margin: 30px 0 0 0;
+  margin: 30px 3px;
   user-select: none;
 }
 .row {
@@ -67,8 +66,8 @@ button {
   border-radius: 4px;
   cursor: pointer;
   user-select: none;
-  background-color: #d3d6da;
-  color: #1a1a1b;
+  background-color: var(--key-bg);
+  color: var(--key-color);
   flex: 1;
   display: flex;
   justify-content: center;

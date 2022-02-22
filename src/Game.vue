@@ -43,8 +43,7 @@ onUnmounted(() => {
 
 function onKey(key: string) {
   if (!allowInput) return;
-  // const letters = []
-  // const isLetter = 0
+
   if (/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FF-\s]*$/.test(key)) {
     fillTile(key.toLowerCase());
   } else if (key === "Backspace") {
@@ -164,10 +163,14 @@ const icons = {
 };
 
 function genResultGrid() {
+  // Reverse the answer grid since Persian is RTL
   return board
     .slice(0, currentRowIndex + 1)
     .map((row) => {
-      return row.map((tile) => icons[tile.state]).join("");
+      return row
+        .map((tile) => icons[tile.state])
+        .reverse()
+        .join("");
     })
     .join("\n");
 }
@@ -190,7 +193,7 @@ function copyResult() {
   <!-- Message -->
   <Transition>
     <div class="message" v-if="message">
-      {{ message }}
+      <span dir="rtl">{{ message }}</span>
       <pre v-if="grid">{{ grid }}</pre>
       <button
         v-if="grid"
@@ -208,10 +211,7 @@ function copyResult() {
   <!-- Header -->
   <header>
     <h1>Persian Wordle</h1>
-    <a
-      id="source-link"
-      href="https://github.com/mostafa7904/Persian-wordle"
-      target="_blank"
+    <a href="https://github.com/mostafa7904/Persian-wordle" target="_blank"
       >Source</a
     >
   </header>
@@ -295,7 +295,6 @@ function copyResult() {
 .row {
   display: grid;
   direction: rtl;
-
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 5px;
 }
@@ -328,10 +327,10 @@ function copyResult() {
   -webkit-backface-visibility: hidden;
 }
 .tile .front {
-  border: 2px solid #d3d6da;
+  border: 2px solid var(--tile-border);
 }
 .tile.filled .front {
-  border-color: #999;
+  border-color: var(--tile-border);
 }
 .tile .back {
   transform: rotateX(180deg);
