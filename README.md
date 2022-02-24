@@ -11,3 +11,6 @@ This project is forked from [VWordle](https://vue-wordle.netlify.app/), made by 
 Made in Vue 3 and typescript.
 
 This repository is open sourced for learning purposes only - the original creator(s) of Wordle own all applicable rights to the game itself.
+
+Thanks to @LaLiLuLeLoLZ for some word insprations.
+Using [PersianOcr](https://github.com/reza1615/PersianOcr) repo for more words inspiration.
