@@ -45,7 +45,7 @@ function onKey(key: string) {
   if (!allowInput) return;
 
   if (/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FF-\s]*$/.test(key)) {
-    fillTile(key.toLowerCase());
+    fillTile(key);
   } else if (key === "Backspace") {
     clearTile();
   } else if (key === "Enter") {
