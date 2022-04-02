@@ -25,6 +25,11 @@ h1 {
   margin: 4px 0;
   font-size: 36px;
 }
+@media screen and (max-width: 360px) {
+  h1 {
+    font-size: 25px;
+  }
+}
 
 a {
   color: var(--key-color);
@@ -33,7 +38,7 @@ a {
 
 header {
   border-bottom: 1px solid var(--tile-border);
-  margin: 0px 10px 30px 10px;
+  margin: 0px 10px 15px 10px;
   position: relative;
   display: flex;
   justify-content: space-between;

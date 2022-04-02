@@ -72,7 +72,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: uppercase;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
   transition: all 0.2s 1.5s;
 }

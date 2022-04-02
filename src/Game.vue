@@ -20,6 +20,10 @@ const board = $ref(
 // Current active row.
 let currentRowIndex = $ref(0);
 const currentRow = $computed(() => board[currentRowIndex]);
+const isRandom = $computed(() => {
+  const queries = new URLSearchParams(location.search);
+  return !!queries.get("random");
+});
 
 // Feedback state: message and shake
 let message = $ref("");
@@ -130,7 +134,7 @@ function completeRow() {
     } else {
       // game over :(
       setTimeout(() => {
-        showMessage(answer.toUpperCase(), -1);
+        showMessage(answer, -1);
       }, 1600);
     }
   } else {
@@ -158,15 +162,15 @@ function shake() {
 const icons = {
   [LetterState.CORRECT]: "🟩",
   [LetterState.PRESENT]: "🟨",
-  [LetterState.ABSENT]: "⬜",
+  [LetterState.ABSENT]: "⬛",
   [LetterState.INITIAL]: null,
 };
 
 function genResultGrid() {
-  // Reverse the answer grid since Persian is RTL
   return board
     .slice(0, currentRowIndex + 1)
     .map((row) => {
+      // Reverse the answer grid since Persian is RTL
       return row
         .map((tile) => icons[tile.state])
         .reverse()
@@ -177,15 +181,14 @@ function genResultGrid() {
 
 function copyResult() {
   if ("clipboard" in navigator) {
-    let text = `Persian wordle ${getNumberOfWordle()} `; // Persian wordle 52
-    text += `${currentRowIndex + 1} / ${board.length}`; // Persian wordle 52 3 / 6
+    let text = `Persian wordle ${getNumberOfWordle()} `; // Eg. Persian wordle 52
+    text += `${currentRowIndex + 1} / ${board.length}`; // Eg. Persian wordle 52 3 / 6
     text += `\n`; // A line break
     text += `${grid}`; // The answer grid
 
     navigator.clipboard.writeText(text);
     showMessage("کپی شد.", -1);
   }
-  // No fallback. If you use IE, look back at your life decisions and come back. ok?
 }
 </script>
 
@@ -210,10 +213,14 @@ function copyResult() {
 
   <!-- Header -->
   <header>
+    <a href="?random=1" v-if="!isRandom"> Random </a>
+    <a href="/" v-if="isRandom"> Daily </a>
+
     <h1>Persian Wordle</h1>
-    <a href="https://github.com/mostafa7904/Persian-wordle" target="_blank"
-      >Source</a
-    >
+
+    <a href="https://github.com/mostafa7904/Persian-wordle" target="_blank">
+      Source
+    </a>
   </header>
   <!-- End of Header -->
 
@@ -280,14 +287,15 @@ function copyResult() {
   position: absolute;
   left: 50%;
   top: 80px;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 16px 20px;
+  background-color: #ffff;
+  color: #121213;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
   z-index: 2;
   border-radius: 4px;
   transform: translateX(-50%);
-  transition: opacity 0.3s ease-out;
-  font-weight: 600;
+  transition: opacity 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .message.v-leave-to {
   opacity: 0;
