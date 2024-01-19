@@ -14,3 +14,9 @@ This repository is open sourced for learning purposes only - the original creato
 
 Thanks to @LaLiLuLeLoLZ for some word insprations.
 Using [PersianOcr](https://github.com/reza1615/PersianOcr) repo for more words inspiration.
+
+Extracting the words from [PersianOcr](https://github.com/reza1615/PersianOcr) was done with a simple node.js app that would:
+1. Filter only for 5 letter words
+2. Filter out words containing abnormal letters
+3. Turn the data into JSON
+4. Divide the big json files into smaller ones for the last review
